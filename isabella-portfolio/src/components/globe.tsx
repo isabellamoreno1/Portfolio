@@ -89,6 +89,7 @@ export default function TravelGlobe({ onReady }: { onReady?: (fly: () => void) =
   const [selected, setSelected] = useState<Place | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [isFlying, setIsFlying] = useState(false);
+  const [visitedHistory, setVisitedHistory] = useState<string[]>([]);
 
   useEffect(() => {
     import("react-globe.gl").then((module) => {
@@ -136,10 +137,14 @@ export default function TravelGlobe({ onReady }: { onReady?: (fly: () => void) =
     });
     if (citiesWithPhotos.length === 0) return;
 
-    let randomPlace;
-    do {
-      randomPlace = citiesWithPhotos[Math.floor(Math.random() * citiesWithPhotos.length)];
-    } while (citiesWithPhotos.length > 1 && randomPlace.name === selected?.name);
+    // Filter out already visited; reset if we've seen them all
+    let remaining = citiesWithPhotos.filter(p => !visitedHistory.includes(p.name));
+    if (remaining.length === 0) {
+      setVisitedHistory([]);
+      remaining = citiesWithPhotos;
+    }
+
+    const randomPlace = remaining[Math.floor(Math.random() * remaining.length)];
 
     const controls = globeRef.current?.controls();
     if (controls) controls.autoRotate = false;
@@ -156,13 +161,14 @@ export default function TravelGlobe({ onReady }: { onReady?: (fly: () => void) =
       setSelected({ ...randomPlace, images: photos });
       setLightboxIndex(null);
       setIsFlying(false);
+      setVisitedHistory(prev => [...prev, randomPlace.name]);
     }, 2200);
   };
 
-  // Expose takeMeSomewhere to parent
+  // Expose takeMeSomewhere to parent — re-expose whenever visitedHistory changes
   useEffect(() => {
     if (onReady && GlobeComponent) onReady(takeMeSomewhere);
-  }, [GlobeComponent]);
+  }, [GlobeComponent, visitedHistory]);
 
   const closeModal = () => {
     setSelected(null);
