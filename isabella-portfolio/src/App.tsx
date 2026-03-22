@@ -61,40 +61,73 @@ export default function App() {
 />
   {/* Home Page Text */}
   <div className="relative z-10 text-center max-w-4xl mx-auto px-8">
-
-    <p className="tracking-[0.5em] text-sm tex-[#7C2D45]/80 mb-12 font-medium">
+  <motion.p className="tracking-[0.5em] text-sm text-[#7C2D45]/80 mb-12 font-medium"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.1 }}
+    >
       PORTFOLIO 2026
-    </p>
+    </motion.p>
 
-    <h1 className="text-[6rem] md:text-[7rem] font-serifItalic2 text-[#4A0F2A] leading-none">
+    <motion.h1
+      className="text-[6rem] md:text-[7rem] font-serifItalic2 text-[#4A0F2A] leading-none"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+    >
       Isabella
-    </h1>
+    </motion.h1>
 
-    <h2 className="text-2xl tracking-[0.6em] text-[#6B1E3A] mt-6 mb-10 font-semibold">
+    <motion.h2
+      className="text-2xl tracking-[0.6em] text-[#6B1E3A] mt-6 mb-10 font-semibold"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, delay: 0.5 }}
+    >
       MORENO
-    </h2>
+    </motion.h2>
 
-    <div className="w-20 h-[2px] bg-[#4A0F2A] mx-auto mb-12" />
+    <motion.div
+      className="w-20 h-[2px] bg-[#4A0F2A] mx-auto mb-12"
+      initial={{ scaleX: 0 }}
+      animate={{ scaleX: 1 }}
+      transition={{ duration: 0.6, delay: 0.7 }}
+    />
 
-    <a
+<motion.a
       href="#projects"
-      className="inline-block bg-[#4A0F2A] hover:bg-[#4A1028] text-white px-14 py-5 rounded-full text-sm tracking-widest font-semibold shadow-2xl transition duration-300 hover:scale-105 hover:bg-[#3D0A05]"
+      className="inline-block bg-[#4A0F2A] hover:bg-[#3D0A05] text-white px-14 py-5 rounded-full text-sm tracking-widest font-semibold shadow-2xl transition duration-300"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.9 }}
+      whileHover={{ scale: 1.05 }}
     >
       VIEW MY WORK
-    </a>
+    </motion.a>
 
   </div>
+
+  <style>{`
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  `}</style>
 </section>
-
-
 
 
 {/* About Me Section */}
 <section id="about" className="py-44 px-8 bg-[#F1D1D8]">
   <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-28 items-center">
 
-    <div className="max-w-xl">
-
+    <motion.div
+      className="max-w-xl"
+      initial={{ opacity: 0, x: -40 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+    >
       <h2 className="text-6xl font-serifItalic2 text-[#5A1633] leading-tight">
         About Me
       </h2>
@@ -102,38 +135,41 @@ export default function App() {
       <div className="w-20 h-[2px] bg-[#7A1E3A] mt-6 mb-14" />
 
       <p className="text-[#6D2542] text-lg font-serif leading-relaxed mb-10">
-      I really enjoy the middle ground where engineering meets the person actually using the app. I think the best software happens when you’re paying just
-       as much attention to the user’s experience as you are to the logic happening in the background.
+        I really enjoy the middle ground where engineering meets the person actually using the app. I think the best software happens when you're paying just
+        as much attention to the user's experience as you are to the logic happening in the background.
       </p>
 
       <p className="text-[#6D2542] text-lg font-serif leading-relaxed mb-10">
-      I am drawn to projects where engineering and business goals overlap. I enjoy the challenge of making technical decisions that actually lead to better
-       results for the product and the people using it.
+        I am drawn to projects where engineering and business goals overlap. I enjoy the challenge of making technical decisions that actually lead to better
+        results for the product and the people using it.
       </p>
 
       <p className="text-[#6D2542] text-lg font-serif leading-relaxed">
-        I’m focused on growing into an engineer who can build, collaborate, and think beyond the surface level!
+        I'm focused on growing into an engineer who can build, collaborate, and think beyond the surface level!
       </p>
-
-    </div>
+    </motion.div>
 
     {/* Headshot Picture */}
-    <div className="relative flex justify-center">
+    <motion.div
+      className="relative flex justify-center"
+      initial={{ opacity: 0, x: 40 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+    >
       <div className="relative w-[400px]">
-
-        <div className="absolute inset-0 bg-white rounded-3xl shadow-xl scale-105 -z-10" />
-
+      <div className="absolute inset-0 bg-white rounded-3xl shadow-xl -z-10" />
         <img
           src={headshot}
           alt="Isabella Moreno"
           className="w-full h-[520px] object-cover rounded-3xl shadow-lg transition duration-500 hover:scale-[1.02]"
         />
-
       </div>
-    </div>
+    </motion.div>
 
   </div>
 </section>
+
 
 {/* Globe Section */}
 <section id="travel" className="bg-[#f8f5fb] pt-20">
